@@ -1,14 +1,16 @@
-import string
-class Solution(object):
-    def simplifyPath(self, path):
-        """
-        :type path: str
-        :rtype: str
-        """
+#top 5% of submissions
+class Solution:
+    def simplifyPath(self, path: str) -> str:
         stack = []
-        for s in path.split('/'):
-            if s == '..' and stack:
-                stack.pop()
-            elif s and s not in ('.', '..'):
-                stack.append(s)
-        return "".join('/' + s for s in stack) if stack else "/"
+        dirs = path.split('/')
+        for directory in dirs:
+            if len(directory) > 0:
+                if directory == '.': 
+                    continue
+                elif directory == '..':
+                    if stack:
+                        del stack[-1]
+                else:
+                    stack.append(directory)
+        print(stack)
+        return '/'+'/'.join(stack)
