@@ -1,3 +1,4 @@
+# top 36%  - while implemention is correct, there is plenty of room to improve efficiency!
 class MaxStack:
 
     def __init__(self):
