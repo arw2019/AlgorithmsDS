@@ -9,14 +9,14 @@ class Solution:
         return ans
 
 # top 2%
-# class Solution:
-#     def largestUniqueNumber(self, A: List[int]) -> int:
-#         singles, multiples = set(), set()
-#         maxNum = float('-inf')
-#         for a in A:
-#             if not (a in singles or a in multiples): 
-#                 singles.add(a)
-#             elif a in singles:
-#                 singles.remove(a)
-#                 multiples.add(a)
-#         return max(singles) if singles else -1
+class Solution:
+    def largestUniqueNumber(self, A: List[int]) -> int:
+        singles, multiples = set(), set()
+        maxNum = float('-inf')
+        for a in A:
+            if not (a in singles or a in multiples): 
+                singles.add(a)
+            elif a in singles:
+                singles.remove(a)
+                multiples.add(a)
+        return max(singles) if singles else -1
