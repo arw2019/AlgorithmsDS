@@ -10,7 +10,7 @@ class Solution:
     def delNodes(self, root: TreeNode, to_delete: List[int]) -> List[TreeNode]:
         to_delete = set(to_delete)
         ans = []
-        def dfs(node: TreeNode, is_root_node: bool = False) -> TreeNode:
+        def dfs(node: TreeNode, is_root_node: bool) -> TreeNode:
             if not node: return None
             for_deletion = node.val in to_delete
             if is_root_node and not for_deletion:
