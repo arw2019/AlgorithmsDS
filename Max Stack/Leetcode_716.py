@@ -94,4 +94,3 @@ class MaxStack:
 # param_3 = obj.top()
 # param_4 = obj.peekMax()
 # param_5 = obj.popMax()
-# top 36%  - while implemention is correct, there is plenty of room to improve efficiency!
