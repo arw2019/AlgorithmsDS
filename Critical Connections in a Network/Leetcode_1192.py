@@ -1,3 +1,4 @@
+# my implementation of Tarjan's algorithm
 from collections import defaultdict
 
 class Solution:
@@ -40,3 +41,36 @@ class Solution:
                 dfs(u)
         
         return self.critical_connections
+
+# a cleaner implementation of the same algorithm
+# from AC solutions on Leetcode
+class Solution:
+    def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
+        graph = [[] for _ in range(n)]
+        visits = [-1]*n
+        clock = 0
+        self.critical = []
+        
+        # make graph
+        for u, v in connections:
+            graph[u] += [v]
+            graph[v] += [u]
+    
+        def dfs(node: int, parent: int) -> int:
+            nonlocal clock
+            clock += 1
+            visits[node] = clock
+            min_node = clock
+            for neighbor in graph[node]:
+                if visits[neighbor] == -1:
+                    min_neighbor = dfs(neighbor, node)
+                    min_node = min(min_node, min_neighbor)
+                    if visits[node] < min_neighbor:
+                        self.critical += [(node, neighbor)]
+                elif neighbor != parent:
+                    min_node = min(min_node, visits[neighbor])
+            return min_node
+    
+        dfs(0, -1)
+        
+        return self.critical
