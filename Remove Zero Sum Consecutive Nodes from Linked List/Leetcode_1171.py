@@ -4,8 +4,33 @@
 #         self.val = x
 #         self.next = None
 
-from collections import defaultdict
+# in-place solution
+# manipulate pointers in the input list
+class Solution:
+    def removeZeroSumSublists(self, head: ListNode) -> ListNode:
+        if not head: return head
+        
+        sentinel = ListNode(-1)
+        sentinel.next = head
+        preSum = {0: [sentinel]}
+        curSum = 0
+        
+        cur = head
+        while cur:
+            curSum += cur.val
+            if curSum in preSum:
+                temp = cur.next
+                for node in preSum[curSum]:
+                    node.next = temp
+                preSum[curSum].append(cur)
+            elif curSum not in preSum:
+                preSum[curSum] = [cur]
+            cur = cur.next
+        
+        return sentinel.next
 
+# AC solution using a python list to store the linked list values
+from collections import defaultdict
 class Solution:
     def removeZeroSumSublists(self, head: ListNode) -> ListNode:
         arr, d, inf = [0], defaultdict(list), float('inf')
