@@ -1,17 +1,17 @@
 class Solution:
     def generateAbbreviations(self, word: str) -> List[str]:
-        res = [""]
+        queue = [""]
         for i, char in enumerate(word):
-            newRes = []
-            for x in res: 
+            newQueue = []
+            for x in queue: 
                 if not x or x[-1] != '#': 
-                    newRes += [x+char, x+'#1#']
+                    newQueue += [x+char, x+'#1#']
                 else: 
                     y, num, _ = x.split('#')
-                    newRes += [y+ num + char, y + '#' + str(int(num)+1) + '#']
-            res = newRes
+                    newQueue += [y+ num + char, y + '#' + str(int(num)+1) + '#']
+            queue = newQueue
         ans = []
-        for x in res:
+        for x in queue:
             if not x or x[-1] != '#': 
                 ans += [x]
             else:
