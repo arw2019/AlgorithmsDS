@@ -1,3 +1,11 @@
+# top 3% solution using iterators
+# https://leetcode.com/problems/maximum-average-subarray-i/discuss/105435/2-lines-Python-2-versions
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        if k == 0: return float('-inf')
+        sums = [0] + list(itertools.accumulate(nums))
+        return max(map(operator.sub, sums[k:], sums))/k
+
 # slow - bottom 12%
 # O(N) time, O(k) space solution
 from collections import deque
