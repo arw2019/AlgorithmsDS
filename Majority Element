@@ -1,9 +1,0 @@
-# O(N) space but fast
-from collections import Counter
-class Solution:
-    def majorityElement(self, nums: List[int]) -> List[int]:
-        res = []
-        n, c = len(nums), Counter(nums)
-        for num, freq in c.items():
-            if freq > n//3: res.append(num)
-        return res
