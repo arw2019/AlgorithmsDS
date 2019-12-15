@@ -1,3 +1,40 @@
+# slighly faster - cuts down search space & handles some edge cases by hand
+class Solution:
+    def threeSum(self, A: List[int]) -> List[List[int]]:
+        if not A or len(A) < 3: return []
+        A.sort()
+        if A[0] == A[-1] == 0: return [[0,0,0]]
+        if A[0] >= 0 or A[-1] <= 0: return []
+        res = []
+        non_zero_index = next(index for index, val in enumerate(A) if val > 0)
+        for pivot in range(non_zero_index):
+            # skip if already computed
+            if pivot > 0 and A[pivot-1] == A[pivot]:
+                continue
+            left = pivot+1
+            right = len(A)-1
+            while left < right:
+                tot = A[pivot] + A[left] + A[right]
+                if tot > 0:
+                    while left < right and A[right] == A[right-1]:
+                        right -= 1
+                    right -=1
+                elif tot < 0:
+                    while left < right and A[left] == A[left+1]:
+                        left += 1
+                    left += 1
+                else:
+                    res.append([A[pivot], A[left], A[right]])
+                    while left < right and A[right] == A[right-1]:
+                        right -= 1
+                    while left < right and A[left] == A[left+1]:
+                        left += 1
+                    right -= 1
+                    left += 1
+        return res
+
+#------------------------------------------------------------------
+    
 class Solution:
     def threeSum(self, A: List[int]) -> List[List[int]]:
         A.sort()
