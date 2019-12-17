@@ -1,3 +1,4 @@
+# following the approach of https://leetcode.com/problems/tag-validator/discuss/279586/Python-One-pass-leveraging-State-Machine
 class Solution:
     def isValid(self, code: str) -> bool:
         stack = []
