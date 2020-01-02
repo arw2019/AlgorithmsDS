@@ -6,11 +6,11 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        cur, prev, nextNode = head, None, None
+        cur, prev, _next = head, None, None
         while cur:
-            nextNode = cur.next
+            _next = cur.next
             cur.next = prev
-            cur, prev = nextNode, cur
+            cur, prev = _next, cur
         return prev
             
 
