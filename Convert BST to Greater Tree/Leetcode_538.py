@@ -6,20 +6,15 @@
 #         self.right = None
 
 class Solution:
-    def convertBST(self, root: TreeNode) -> TreeNode:
-        
+    
+    def __init__(self):
         self.greaterSum = 0
         
-        def dfs(node: TreeNode) -> None:
-            """
-            reverse inorder traversal of the tree
-            """
-            if not node: return
-            dfs(node.right)
-            self.greaterSum += node.val
-            node.val = self.greaterSum
-            dfs(node.left)
-            
-        dfs(root)
-        
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        self.convertBST(root.right)
+        self.greaterSum += root.val
+        root.val = self.greaterSum
+        self.convertBST(root.left)
         return root
