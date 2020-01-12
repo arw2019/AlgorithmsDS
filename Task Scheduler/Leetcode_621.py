@@ -1,3 +1,19 @@
+# counting solution
+# 6 * faster than heap solution
+
+from collections import Counter
+
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        
+        freqs = list(Counter(tasks).values())
+        most_common = max(freqs)
+        m = freqs.count(most_common)
+        l = len(tasks) - m * most_common
+        return m * most_common + max((most_common-1)*(n+1-m), l)
+
+*********************************************************************************
+
 # correct but slow
 
 from collections import Counter
