@@ -37,8 +37,9 @@ class Solution:
                 cur = next(timer)
                 continue
             
-            pq = list(merge(pq, cooldown))
-            
+            for e in cooldown:
+                heappush(pq, e)
+                
             tot += 1
             cur = next(timer)
             if freq > 1:
