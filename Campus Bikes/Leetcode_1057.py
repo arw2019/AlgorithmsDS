@@ -1,3 +1,31 @@
+# a leaner implementation of the same idea
+class Solution:
+    def assignBikes(self, workers: List[List[int]], bikes: List[List[int]]) -> List[int]:
+                
+        pairs = []
+                
+        for worker_id, worker_location in enumerate(workers):
+            worker_x, worker_y = worker_location
+            for bike_id, bike_location in enumerate(bikes):
+                bike_x, bike_y = bike_location
+                pairs.append((
+                        abs(worker_x - bike_x) + abs(worker_y - bike_y),
+                        worker_id,
+                        bike_id
+                ))
+        
+        pairs.sort()
+        
+        ans = [-1] * len(workers)
+        taken = set()
+        for _, worker_id, bike_id in pairs:
+            if ans[worker_id] == -1 and bike_id not in taken:
+                ans[worker_id] = bike_id
+                taken.add(bike_id)
+        
+        return ans
+    
+
 #correct but TLE
 
 from collections import namedtuple
