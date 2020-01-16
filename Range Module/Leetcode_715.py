@@ -1,3 +1,37 @@
+from bisect import bisect_left, bisect_right
+
+class RangeModule:
+
+    def __init__(self):
+        self.track = []
+        
+    def _modify(self, left, right, remove: bool) -> None:
+        start = bisect_left(self.track, left)
+        end = bisect_right(self.track, right)
+        
+        subtrack = []
+        if start % 2 == remove:
+            subtrack.append(left)
+        if end % 2 == remove:
+            subtrack.append(right)
+			
+        self.track[start:end] = subtrack
+        
+    def addRange(self, left, right):
+        self._modify(left, right, remove=False)
+
+    def removeRange(self, left, right):
+        self._modify(left, right, remove=True)
+		
+    def queryRange(self, left, right):
+        start = bisect.bisect_right(self.track, left)
+        end = bisect.bisect_left(self.track, right)
+		
+        return start == end and start % 2 == 1
+    
+    
+**************************************************************
+
 import bisect
 
 class RangeModule:
@@ -55,7 +89,9 @@ class RangeModule:
    
         
         if self.debug: print(f'current set of ranges: {self._intervals}')
-            
+
+**************************************************************
+
 # Your RangeModule object will be instantiated and called as such:
 # obj = RangeModule()
 # obj.addRange(left,right)
