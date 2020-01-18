@@ -11,6 +11,32 @@ class Solution:
         if not root: return 
         
         self.height = 0
+        self._sum = 0
+        
+        def dfs(node: TreeNode, h: int = 0) -> None:
+            if not (node.left or node.right):
+                if h == self.height:
+                    self._sum += node.val
+                elif h > self.height:
+                    self.height = h
+                    self._sum = node.val
+            else:
+                if node.left: dfs(node.left, h+1)
+                if node.right: dfs(node.right, h+1)
+        
+        dfs(root)
+        
+        return self._sum
+    
+*************************************************************************
+# correct solution with two passes of dfs
+    
+class Solution:
+    def deepestLeavesSum(self, root: TreeNode) -> int:
+        
+        if not root: return 
+        
+        self.height = 0
         
         def dfs_1(node: TreeNode, h: int = 0) -> None:
             if not (node.left or node.right): 
