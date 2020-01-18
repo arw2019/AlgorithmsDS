@@ -11,12 +11,12 @@ class Solution:
         if not root: return 
         
         self.height = 0
-        self._sum = 0
+        self.sum_ = 0
         
         def dfs(node: TreeNode, h: int = 0) -> None:
             if not (node.left or node.right):
                 if h == self.height:
-                    self._sum += node.val
+                    self.sum_+= node.val
                 elif h > self.height:
                     self.height = h
                     self._sum = node.val
@@ -26,7 +26,7 @@ class Solution:
         
         dfs(root)
         
-        return self._sum
+        return self.sum_
     
 *************************************************************************
 # correct solution with two passes of dfs
