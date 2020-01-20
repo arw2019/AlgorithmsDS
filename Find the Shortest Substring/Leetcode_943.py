@@ -15,15 +15,21 @@ class Solution:
                     return len(s1)-i
             return 0
 
-        def pathToStr(path):
-            print(f'path={path}')
+        def pathToStr(path: List[int]) -> str:
+            """
+            Concatenates strings into superstring.
+            Chars are added as specified by path.
+            """
             res = A[path[0]]
             for i in range(1, len(path)):
                 res += A[path[i]][G[path[i-1]][path[i]]:]
-                print(G[path[i-1]][path[i]])
-                print(A[path[i]][G[path[i-1]][path[i]]:])
             return res
 
+        """
+        Generate the graph.
+        weight between words w1, w2 is number of 
+        saved characters when concatenating w1+w2.
+        """
         n = len(A)
         G = [[0]*n for _ in range(n)]
         for i in range(n):
@@ -43,6 +49,11 @@ class Solution:
                 continue
             for i in range(n):
                 next_mask = mask | (1<<i)
+                """
+                First check that every node is traversed only once.
+                Secondly do a greedy check. If we don't save more characters
+                from the new configuration, we need not consider it further.
+                """
                 if next_mask != mask and d[mask][node] + G[node][i] >= d[next_mask][i]:
                     d[next_mask][i] = d[mask][node] + G[node][i]
                     Q.append((i, next_mask, path+[i], d[next_mask][i]))
