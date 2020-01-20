@@ -3,7 +3,7 @@
 from collections import deque
 
 class Solution: 
-    def shortestSubstring(self, A: 'List[str]') -> str: 
+    def shortestSuperstring(self, A: 'List[str]') -> str: 
             
         def getDistance(s1: str, s2: str) -> int:
             """
