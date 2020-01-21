@@ -1,3 +1,22 @@
+# an efficient recursive solution (AC)
+
+class Solution:
+    
+    def __init__(self):
+        self.mod = 1337
+    
+    def helper(self, a: int, k: int) -> int:
+        a %= self.mod
+        res = 1
+        for _ in range(k):
+            res = (res * a) % self.mod
+        return res
+    
+    def superPow(self, a: int, b: List[int]) -> int:
+        if not b: return 1
+        last_digit = b.pop()
+        return self.helper(self.superPow(a, b), 10) * self.helper(a, last_digit) % self.mod
+
 # brute force solution (TLE)
 
 class Solution:
