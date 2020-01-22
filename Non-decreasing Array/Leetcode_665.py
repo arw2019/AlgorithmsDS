@@ -1,3 +1,15 @@
+# yet another implementation
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        bad, N = None, len(nums)
+        for i in range(N-1):
+            if nums[i]>nums[i+1]:
+                if bad is not None: return False
+                bad = i
+        return (not bad) or (nums[bad-1]<=nums[bad+1]) or \
+                (bad == N-2) or (nums[bad] <= nums[bad+2])
+    
+
 # alternative implementation of the same idea
 class Solution:
     def checkPossibility(self, nums: List[int]) -> bool:
