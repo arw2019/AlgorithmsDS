@@ -5,6 +5,25 @@
 #         self.left = None
 #         self.right = None
 
+# bfs solution
+
+from collections import defaultdict, deque
+
+class Solution:
+    def verticalOrder(self, root: TreeNode) -> List[List[int]]:
+        d = defaultdict(list)
+        q = deque([(root, 0)])
+        while q:
+            node, j = q.popleft()
+            if node:
+                d[j]+=[node.val]
+                q.append((node.left, j-1))
+                q.append((node.right, j+1))
+        return [d[j] for j in sorted(d.keys())]
+        
+
+# dfs solution
+
 from collections import defaultdict
 
 class Solution:
