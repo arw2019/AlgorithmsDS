@@ -1,3 +1,26 @@
+# a more efficient solution 
+# build up result from buckets
+# don't have to compute result if invalid
+
+from collections import Counter
+
+class Solution:
+    def rearrangeString(self, S: str, k: int) -> str:
+        if k <= 1: return S
+        cnt = Counter(S)
+        M = max(cnt.values())
+        nM = list(cnt.values()).count(M)
+        if (M-1)* k + nM > len(S):
+            return ''
+        mostCommon = [char for char, _ in cnt.most_common(nM)]
+        bucket = [''.join(mostCommon)] * M
+        cnt -= Counter(mostCommon * M)
+        for idx, char in enumerate(cnt.elements()):
+            bucket[idx%(M-1)] += char
+        return ''.join(bucket)
+
+# AC solution using a priority queue to build up the result
+
 import itertools
 from heapq import heappop, heappush
 
