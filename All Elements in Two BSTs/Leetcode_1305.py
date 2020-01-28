@@ -1,4 +1,23 @@
-# correct but slow (TLE)
+# brute force 
+# much faster (AC) 
+# I expect the speed improvement is due to the efficiency of python's in-built sort 
+# on an array with a lot of existing structure 
+
+class Solution:
+    def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+
+        def inorder(node: TreeNode):
+            res = []
+            if node:
+                res += inorder(node.left)
+                res.append(node.val)
+                res += inorder(node.right)
+            return res
+              
+        return sorted(inorder(root1) + inorder(root2))
+
+# solution that takes advantage of BST property
+# in python, this is quite slow compared to brute force (TLE for worst case inputs)
 
 class Solution:
     def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
