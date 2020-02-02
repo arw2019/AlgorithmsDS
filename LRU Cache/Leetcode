@@ -1,0 +1,27 @@
+from collections import OrderedDict
+
+class LRUCache(OrderedDict):
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        super().__init__()
+
+    def get(self, key: int) -> int:
+        try:
+            value = super().__getitem__(key)
+            self.move_to_end(key, last=False)
+        except KeyError:
+            return -1
+        return value
+
+    def put(self, key: int, value: int) -> None:
+        # print(super().keys())
+        super().__setitem__(key, value)
+        self.move_to_end(key, last=False)
+        if len(self) > self.capacity:
+            self.popitem(last=True)
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
