@@ -1,3 +1,28 @@
+# a different approach
+# better time complexity (linear in number of palindromic substrings)
+# time: 308ms (top 9%)
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        if n <=1: return s
+        
+        candidates  = [(i, i+1) for i in range(n)] + [(i, i+2) for i in range(0, n-1) if s[i] == s[i+1]]
+        
+        while True:
+            # print(candidates)
+            newCandidates = []
+            for start, end in candidates:
+                if start - 1 >= 0 and end < n and s[start-1]==s[end]:
+                    newCandidates += [(start-1, end+1)]
+            if not newCandidates:
+                start, end = sorted(candidates, key=lambda x: x[1] - x[0], reverse=True)[0]
+                return s[start:end]
+            else:
+                candidates.clear()
+                candidates.extend(newCandidates)
+             
+                                   
+
 ## I thought there might be a further improvement if expand returns indicies rather than a slice. 
 ## Actually with that change the time is consistently worse by ~50ms
 
