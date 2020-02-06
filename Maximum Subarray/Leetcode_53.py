@@ -1,4 +1,5 @@
-# straightforward O(N) solution
+# dynamic program 
+# O(N) runtime
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
