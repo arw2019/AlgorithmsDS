@@ -19,3 +19,5 @@ class Solution:
                         dp[i+1][j+1] = dp[i+1][j] or \
                                 dp[i][j+1] or dp[i+1][j-1]
         return dp[-1][-1]
+
+# great explanation: https://leetcode.com/problems/regular-expression-matching/discuss/5651/Easy-DP-Java-Solution-with-detailed-Explanation
