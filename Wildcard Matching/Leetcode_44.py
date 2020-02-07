@@ -1,5 +1,5 @@
 # dynamic program
-# O(m*n) runtime
+# O(m*n) runtime, O(n) space
 
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
@@ -16,6 +16,26 @@ class Solution:
                     pre, cur[i] = cur[i], cur[i-1] or cur[i]
         return cur[m]
 
+# dynamic program
+# o(m*n) runtime, o(m*n) space
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        m, n = len(s), len(p)
+        dp = [[False]*(n+1) for _ in range(m+1)]
+        dp[0][0] = True
+        for j in range(1, n+1):
+            dp[0][j] = p[j-1] == '*' and dp[0][j-1]
+        for j in range(1, n+1):
+            for i in range(1, m+1):
+                if p[j-1] != '*':
+                    if p[j-1] in ('?', s[i-1]):
+                        dp[i][j] = dp[i-1][j-1] 
+                else:
+                    dp[i][j] = dp[i][j-1] or dp[i-1][j]
+                    
+        return dp[-1][-1]
+    
+    
 # finite-state machine solution
 
 class Solution:
