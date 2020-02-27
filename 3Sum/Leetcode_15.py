@@ -56,3 +56,26 @@ class Solution:
                         while lo < hi and A[hi-1] == A[hi]: hi -= 1
                         hi -= 1
         return res
+
+#-----------------------------------
+# hashtable solution
+# O(N^2) runtime, O(N) space
+
+from collections import Counter
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        cnt = Counter(nums)
+        uniqueNums = list(sorted(cnt.keys()))
+        res = []
+        for i, a in enumerate(uniqueNums):
+            for j, b in enumerate(uniqueNums[i:], i):
+                c = - (a + b)
+                if a == b == c:
+                    if cnt[a] >= 3: res+=[[a,a,a]]
+                elif a == b:
+                    if cnt[a]>=2 and cnt[c] > 0: res += [[a, a, c]]
+                elif c == a or c == b:
+                    if cnt[c] >=2: res += [[a, b, c]]
+                else:
+                    if cnt[c] > 0: res += [[a, b, c]]
+        return list(set(tuple(sorted(triplet)) for triplet in res))
