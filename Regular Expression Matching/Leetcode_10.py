@@ -18,7 +18,7 @@ class Solution:
                 elif p[j-1] == '*':
                     dp[i][j] = dp[i][j-2] or (p[j-2] in ('.', s[i-1]) and dp[i-1][j])
         
-        return dp[len(s)][len(p)]
+        return dp[-1][-1]
 
 # dynamic program
 # O(nm) runtime
