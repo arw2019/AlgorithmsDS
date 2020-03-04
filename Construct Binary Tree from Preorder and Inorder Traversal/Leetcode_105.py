@@ -4,12 +4,12 @@
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         inorderIndicies = {val:idx for idx, val in enumerate(inorder)}
-        inorderLoc = 0 
+        preorderLoc = 0 
         def helper(lo, hi):
             if lo>hi: return None
-            nonlocal inorderLoc 
-            root = TreeNode(preorder[inorderLoc])
-            inorderLoc+=1
+            nonlocal preorderLoc 
+            root = TreeNode(preorder[preorderLoc])
+            preorderLoc+=1
             mid = inorderIndicies[root.val]
             root.left = helper(lo, mid-1)
             root.right = helper(mid+1, hi)
