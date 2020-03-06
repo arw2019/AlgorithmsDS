@@ -1,3 +1,12 @@
+# Newton's method
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        y = x
+        while y*y > x:
+            y = (y + x//y) // 2
+        return int(y)
+
+# binary search
 class Solution:
     def mySqrt(self, x: int) -> int:
         lo, hi = 0, x
