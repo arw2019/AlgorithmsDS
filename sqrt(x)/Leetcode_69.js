@@ -5,8 +5,8 @@
 var mySqrt = function(x) {
     var r = x;
     while (r*r > x){
-        r = Math.floor((r+x/r)/2);
+        r = ((r+x/r)/2)>>0;
     }
-    return Math.floor(r)
+    return r
     
 };
