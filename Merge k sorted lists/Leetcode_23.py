@@ -1,24 +1,20 @@
-# top 10%
-
-import heapq
+from heapq import heappush, heappop
 
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-       
-        if not any(l for l in lists): return None 
         
         pq = []
-        for idx, l in enumerate(lists):
-            if l: heapq.heappush(pq, (l.val, idx))
-    
-        res = ListNode(0)
+        [heappush(pq, (l.val, i)) for i,l in enumerate(lists) if l]
+            
+        res = ListNode(float('-inf'))
         cur = res
+        
         while pq:
-            _, idx = heapq.heappop(pq)
-            cur.next = lists[idx]
-            cur, lists[idx] = cur.next, lists[idx].next
-            if lists[idx]: heapq.heappush(pq, (lists[idx].val, idx))
-       
+            _, i = heappop(pq)
+            cur.next = lists[i]
+            cur, lists[i] = cur.next, lists[i].next
+            if lists[i]: heappush(pq, (lists[i].val, i))
+    
         return res.next
     
 # Definition for singly-linked list.
