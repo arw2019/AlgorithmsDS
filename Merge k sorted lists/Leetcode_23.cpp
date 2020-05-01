@@ -1,3 +1,11 @@
+/*
+k = lists.size(); N = total number of nodes in all input lists;
+Time complexity:
+ - To build priority queue: O(k)
+ - To create result: O(N*lgk)
+Space complexity: O(k) to store the heap
+*/
+
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
