@@ -6,6 +6,13 @@ Time complexity:
 Space complexity: O(k) to store the heap
 */
 
+/* On Leetcode this line significantly improves speed. 
+I'm not sure why that is. According to this StackOverflow article:
+https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull
+the speed improvement is a side-effect.
+*/
+static auto x = []() {ios_base::sync_with_stdio(false); cin.tie(NULL); return NULL; }();
+
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
