@@ -2,10 +2,10 @@
 class Solution:
     def isAlienSorted(self, words: List[str], order: str) -> bool:
         d = {char: i for i, char in enumerate(order)}
-        def isGreater(w1: str, w2: str) -> bool:
+        def isGreaterOrEqual(w1: str, w2: str) -> bool:
             key = lambda word: [d[char] for char in word]
-            return key(w1) > key(w2)
-        return all(isGreater(words[i+1], words[i]) for i in range(len(words)-1))
+            return key(w1) >= key(w2)
+        return all(isGreaterOrEqual(words[i+1], words[i]) for i in range(len(words)-1))
 
 # lighter implementation of same idea
 class Solution:
