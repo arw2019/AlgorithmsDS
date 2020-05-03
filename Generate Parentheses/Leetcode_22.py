@@ -2,8 +2,7 @@ from functools import lru_cache
 class Solution:
     @lru_cache()
     def generateParenthesis(self, n: int) -> List[str]:    
-        if n == 0: return ['']
-        if n == 1: return ['()']
+        if n < 2: return ['()'*n]
         res = []
         for i in range(1, n):
             s1, s2 = map(self.generateParenthesis, [i, n-1-i])
