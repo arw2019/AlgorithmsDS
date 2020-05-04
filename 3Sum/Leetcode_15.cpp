@@ -1,6 +1,3 @@
-// AC but extremely slow solution
-// basically a C++ version of my (fast) Python3 solution
-
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -15,7 +12,7 @@ public:
         for (auto const& imap: table)
             uniqueNums.push_back(imap.first);
         
-        vector<vector<int>> ans;
+        set<vector<int>> res;
        
         int n1, n2, n3; vector<int> cur, tmp;
         for (int i=0; i<uniqueNums.size(); ++i){
@@ -28,16 +25,16 @@ public:
                 sort(cur.begin(), cur.end());
                 if ((n3 == n1) || (n3 == n2)){
                     if (table[n3] >= 2)
-                        ans.push_back(cur);
-                } else if (table.count(n3) > 0) {ans.push_back(cur);}
+                        res.insert(cur);
+                } else if (table.count(n3) > 0) {res.insert(cur);}
             }
         }
         
         if (table[0] >= 3) {
-            ans.push_back({0,0,0});}
+            res.insert({0,0,0});}
         
-        set<vector<int>> s(ans.begin(), ans.end());
-        ans.assign(s.begin(), s.end());
+        vector<vector<int>> ans;
+        ans.assign(res.begin(), res.end());
         
         return ans;
     }
