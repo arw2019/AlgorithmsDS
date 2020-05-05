@@ -1,3 +1,8 @@
+// sort nums then find admissible triplets by scanning to left and right of central element
+// O(N^2) time, O(1) space [or O(N) if not allowed to modify input]
+// speed difference c.f. solution below is staggering! 60x speedup
+// must be due to (in)efficiency of associative containers in C++ in this context
+
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
