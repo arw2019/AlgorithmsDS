@@ -1,6 +1,51 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        
+        int sz = nums.size();
+        if (sz<3) return res;
+       
+        sort(nums.begin(), nums.end());
+        
+        int i, *delta = new int[sz];
+        
+        for (i=1; i<sz; i++) delta[i] = nums[i]-nums[i-1];
+        
+        i=0;
+        while (i<sz-2)
+        {
+            int l=i+1;
+            int r=sz-1;
+            int sum = nums[i] + nums[l] + nums[r];
+            while(l<r)
+            {
+                if (sum>0)
+                    sum -= delta[r--];
+                else
+                    if (sum<0)
+                        sum+=delta[++l];
+                    else
+                    {
+                        res.push_back({nums[i], nums[l], nums[r]});
+                        while(++l<r) if (delta[l]) {sum+=delta[l]; break;}
+                        while(l<--r) if (delta[r+1]) {sum-=delta[r+1]; break;}
+                    }
+            }
+            while (++i<sz-2) if (delta[i]) break;
+        }
+        delete [] delta;
+        
+        return res;
+    }
+};
+
+// solution using associative containers (map & set)
+// extremely slow (~2400ms on LC)
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
         map<int, int> table;
         for (int i=0; i<nums.size(); ++i) {
             if (table.count(nums[i]) > 0) {table[nums[i]]++;} 
