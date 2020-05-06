@@ -2,15 +2,20 @@ class Solution {
 private:    
     unordered_map<char, char> aliendict;
 public:
-    bool greaterThan(string word, string order){
-       return true; 
+    string toAlien(string word){
+        string alien = "";
+        for (string::iterator it = word.begin(); it < word.end(); it++){
+            alien += aliendict[*it];
+        }
+        return alien; 
     }
     
     bool isAlienSorted(vector<string>& words, string order) {
         for (int i=0; i<order.size(); ++i){
-            aliendict['a'+i] = order[i];
-            cout << 'a'+i << " " << aliendict['a'+i] << endl;
+            aliendict[order[i]] = 'a' + i;
+            cout << order[i] << " " << aliendict[order[i]] << endl;
         }
+        // cout << toAlien("hla"); 
         return false;
     }
 };
