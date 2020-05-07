@@ -5,6 +5,9 @@
 #         self.left = None
 #         self.right = None
 
+# recursive solution
+# O(h) time, O(h) space for function stack
+# top 1% on LC
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if p.val > q.val: 
@@ -17,7 +20,9 @@ class Solution:
         else: 
             return root
 
-
+# iterative solution
+# O(h) time, O(1) extra space
+# top 50% on LC: constants must be better for recursive solution
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if p.val > q.val: p, q = q, p
