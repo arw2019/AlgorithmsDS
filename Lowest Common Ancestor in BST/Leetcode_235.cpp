@@ -15,7 +15,7 @@ public:
             p = q;
             q = tmp;
         }
-        while (root->val < p->val && root->val > q->val){
+        while (root->val < p->val || root->val > q->val){
             cout << root->val << endl;
             while(root->val < p->val) {root=root->right; cout << root->val << endl;}
             while(root->val > q->val) {root=root->left; cout << root->val << endl;}
