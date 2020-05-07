@@ -8,6 +8,8 @@
  * };
  */
 
+// recursive solution
+// O(h) time, O(h) extra space for function stack
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
@@ -22,6 +24,8 @@ public:
     }
 };
 
+// iterative solution
+// O(h) time, O(1) extra space
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
