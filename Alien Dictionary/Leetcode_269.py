@@ -11,7 +11,6 @@ class Solution:
       
                     
         chars = set(''.join(words))
-        N = len(chars)
         order = []
         while less:
             free = chars - {pair[1] for pair in less}
