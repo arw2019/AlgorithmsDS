@@ -18,18 +18,15 @@ public:
         
         for (auto p: less) cout<<p.first<<" "<<p.second<<endl;
         
-        set<char> chars;
+        set<char> chars, free;
         for (int i=0; i<words.size(); ++i){
-            for (int j=0; j<words.size()-1; ++j) {
+            for (int j=0; j<words[i].size(); j++) {
                 cout << "i: "<<i<< " j: "<<j << " char: "<<words[i][j] << endl;
                 chars.insert(words[i][j]);
             }
         }
 
        
-        for (auto it=chars.begin(); it!=chars.end(); ++it) cout<<"*it: "<<*it<<endl;
-        
-        
         string order="";
         if (less.size() == 0){
             for (int i=0; i<words.size()-1; ++i) {
@@ -38,21 +35,34 @@ public:
         }
        
         while (less.size() > 0){
-            set<char> free = chars;
+            free = chars;
             for (int i=0; i<less.size(); ++i){
                 free.erase(less[i].second); 
+                cout << "erasing from free: " <<less[i].second << endl; 
             }
-            for (auto it=free.begin(); it!=free.end(); ++it) cout<<"*it: "<<*it<<endl;
-            for (auto it=free.begin(); it!=free.end(); ++it) {
+            if (free.size()==0) return ""; 
+            cout<<"Free: "<< endl;
+            for (auto it=free.begin(); it!=free.end(); ++it) { 
+                cout<<"*it: "<<*it<<endl;
                 order+=*it;
                 chars.erase(*it);
             }
-            tmp.clear();
+            
+            cout <<"This is chars: "<<endl;
+            for (auto it=chars.begin(); it!=chars.end(); ++it) cout<<"*it: "<<*it<<endl;
+            
+            tmp.clear(); cout << "New less: " << endl;
             for (auto it=less.begin(); it<less.end(); it++){
-                pair<char, char> p = *it;
-                if (!chars.count(p.first) && !chars.count(p.second)) tmp.push_back(p);
+                p = *it;
+                cout<<p.first<< " " << p.second << endl;
+                if (free.count(p.first)==0 && free.count(p.second)==0){
+                    cout << "adding to tmp" << endl;
+                    tmp.push_back(p);
+                }
             }
             less = tmp;
+            cout << "tmp size: " << tmp.size() << endl;
+            cout << "less size: " << less.size() << endl;
         }
         
         for (auto it=chars.begin(); it!=chars.end(); it++) order += *it;
