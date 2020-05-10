@@ -12,6 +12,7 @@ class Solution:
                     
         chars = set(''.join(words))
         order = []
+        if not less and any(len(words[i+1]) < len(words[i]) for i in range(len(words)-1)): return ''
         while less:
             free = chars - {pair[1] for pair in less}
             if not free: return ''
