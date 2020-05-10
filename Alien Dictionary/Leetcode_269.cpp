@@ -14,6 +14,12 @@ public:
             }
         }
         
+        set<char> chars;
+        for (int i=0; i<words.size(); i++){
+            for (int j=0; j<words.size(); ++j) chars.insert(words[i][j]);
+        }
+       
+        
         return "";
     }
 };
