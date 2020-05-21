@@ -1,4 +1,3 @@
-import random
 class Solution:
     def gardenNoAdj(self, N: int, paths: List[List[int]]) -> List[int]:
         allColors = {1, 2, 3, 4}
