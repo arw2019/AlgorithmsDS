@@ -4,6 +4,9 @@
 #         self.val = x
 #         self.next = None
 
+# O(N1 + N2) time where N1, N2 are lengths of inputs
+# O(1) extra space 
+
 # top 0.7%
 class Solution:
     
