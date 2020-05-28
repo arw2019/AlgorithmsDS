@@ -1,3 +1,5 @@
+# O(log(M) + log(N) time complexity)
+
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         if not (matrix and matrix[0]): return False
