@@ -1,38 +1,29 @@
 from collections import defaultdict
+import re
+
+
 class Solution:
     def countOfAtoms(self, formula: str) -> str:
-        stack, cnt = [], defaultdict(int)
-        N = len(formula)
-        i = 0
-        depth = 0
-        while i < N:
-            if formula[i].isupper():
-                char = formula[i]
-                i+=1
-                while i<N and formula[i].islower():
-                    char += formula[i]
-                    i += 1    
-                if not (i<N and formula[i].isdigit()):
-                    cnt[char] += 1
-                else:
-                    stack += [char] + [1] 
-            elif formula[i].isdigit():
-                num = ''
-                while i < N and formula[i].isdigit():
-                    num += formula[i]
+        tokens = [c for c in re.split("([A-Z]{1}[a-z]?|\(|\)|\d+)", formula) if c]
+        stack, i = [defaultdict(int)], 0
+        while i < len(tokens):
+            token = tokens[i]
+            if token == "(":
+                stack.append(defaultdict(int))
+            else:
+                count = 1
+                # Check if next token is a number.
+                if i + 1 < len(tokens) and tokens[i + 1].isdigit():
+                    count = int(tokens[i + 1])
                     i += 1
-                stack[-1] = int(num)
-                if not depth:
-                    cnt[char] += int(num)
-                    stack.pop(), stack.pop()
-                else:
-                    stack += [char] + [num]
-            elif formula == '(':
-                pass
-            elif formula == ')':
-                pass
-        
-        res = []
-        for element, count in sorted(cnt.items()):
-            res += element + str(count)
-        return ''.join(res)
+                atoms = stack.pop() if token == ")" else {token: 1}
+                # Combine counts of atoms.
+                for atom in atoms:
+                    stack[-1][atom] += atoms[atom] * count
+            i += 1
+        return "".join(
+            [
+                atom + (str(count) if count > 1 else "")
+                for atom, count in sorted(stack[-1].items())
+            ]
+        )
