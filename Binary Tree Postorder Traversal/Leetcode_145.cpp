@@ -7,6 +7,9 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+// O(N) time, O(h) extra space
+
 class Solution {
 public:
     
