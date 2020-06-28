@@ -1,3 +1,24 @@
+# pythonized DP solution
+
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        N = len(nums)
+        nums = [1] + nums + [1]
+        
+        dp = [[0 for _ in range(N+2)] for _ in range(N+2)]
+        
+        for length in range(1, N+1):
+            for start in range(1, N-length+2):
+                end = start + length -1
+                dp[start][end] = max( 
+                        dp[start][final-1] +
+                        nums[start-1]*nums[final]*nums[end+1] +
+                        dp[final+1][end]
+                        for final in range(start, end+1)
+                ) 
+    
+        return dp[1][N]
+
 # DP solution
 # subproblem: best score for subarray nums[start:end]
 # O(N^3) time, O(N^2) space
