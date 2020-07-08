@@ -46,18 +46,18 @@ class Solution:
 # from AC solutions on Leetcode
 class Solution:
     def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
-        graph = [[] for _ in range(n)]
+        graph = [list() for _ in range(n)]
         visits = [-1]*n
         clock = 0
-        self.critical = []
+        critical_connections= list()
         
-        # make graph
         for u, v in connections:
-            graph[u] += [v]
-            graph[v] += [u]
-    
+            graph[u].append(v)
+            graph[v].append(u)
+            
         def dfs(node: int, parent: int) -> int:
             nonlocal clock
+            nonlocal critical_connections
             clock += 1
             visits[node] = clock
             min_node = clock
@@ -66,11 +66,11 @@ class Solution:
                     min_neighbor = dfs(neighbor, node)
                     min_node = min(min_node, min_neighbor)
                     if visits[node] < min_neighbor:
-                        self.critical += [(node, neighbor)]
+                        critical_connections.append((node, neighbor))
                 elif neighbor != parent:
                     min_node = min(min_node, visits[neighbor])
             return min_node
-    
+       
         dfs(0, -1)
         
-        return self.critical
+        return critical_connections
