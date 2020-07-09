@@ -13,7 +13,9 @@ class Solution:
             
             less += next(
                 (
-                    [word1[j]+word2[j]]
+                    [
+                        word1[j]+word2[j]
+                    ]
                     for j in range(scan_length)
                     if word1[j] != word2[j]
                 ),
