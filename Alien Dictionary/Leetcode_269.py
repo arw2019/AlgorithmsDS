@@ -2,9 +2,15 @@ class Solution:
     def alienOrder(self, words: List[str]) -> str:
         N = len(words)
         less = []
+        
         for i in range(N-1):
             word1, word2 = words[i:i+2]
-            scan_length = min(len(word1), len(word2))
+            
+            scan_length = min(
+                len(word1), 
+                len(word2)
+            )
+            
             less += next(
                 (
                     [word1[j]+word2[j]]
@@ -28,7 +34,10 @@ class Solution:
             if not free: return ''
             order += free
             chars -= free
-            less = [pair for pair in less 
-                    if free.isdisjoint(pair)]
+            less = [
+                pair 
+                for pair in less 
+                if free.isdisjoint(pair)
+            ]
             
         return ''.join(order + list(chars))
