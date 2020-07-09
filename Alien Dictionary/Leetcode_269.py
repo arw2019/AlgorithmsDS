@@ -24,7 +24,7 @@ class Solution:
             return ''
         
         while less:
-            free = chars - {pair[1] for pair in less}
+            free = chars - {char for _, char in less}
             if not free: return ''
             order += free
             chars -= free
