@@ -22,7 +22,7 @@ class Solution:
                     rPath = 1 + dfs(node.right)
                 else:
                     dfs(node.right)
-            # print(f'node={node.val}, left:{lPath}, right: {rPath}')
+
             self.ans = max(self.ans, lPath+rPath)
             return max(lPath, rPath)            
 
