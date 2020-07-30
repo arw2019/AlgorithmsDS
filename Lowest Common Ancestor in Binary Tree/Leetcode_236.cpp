@@ -7,19 +7,18 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+// O(N^2) time, O(h) space
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (p->val > q->val) {
-            TreeNode* tmp = p;
-            p = q;
-            q = tmp;
-        }
-        while (root->val < p->val && root->val > q->val){
-            cout << root->val << endl;
-            while(root->val < p->val) {root=root->right; cout << root->val << endl;}
-            while(root->val > q->val) {root=root->left; cout << root->val << endl;}
-        }
-        return root;
+        if ((root == NULL) || (root==p) || (root==q)) return root;
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        if ((left != NULL) && (right != NULL)){
+            return root;
+        } else if (left != NULL) return left;
+        else return right;
     }
 };
+
