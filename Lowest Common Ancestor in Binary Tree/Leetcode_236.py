@@ -1,3 +1,23 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        if root in (p, q):
+            return root
+
+        left = self.lowestCommonAncestor(root.left, p, q) if root.left else None
+        right = self.lowestCommonAncestor(root.right, p, q) if root.right else None
+
+        return root if left and right else left if left else right
+
+# same algo, return namedtuple instead of directly
+
 from collections import namedtuple
 
 class Solution:
