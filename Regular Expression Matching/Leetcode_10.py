@@ -1,3 +1,26 @@
+# same algo as below, implemented in a single double for loop
+
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        n, m = len(s), len(p)
+        dp = [[False]*(m+1) for i in range(n+1)]
+        
+        for i in range(n+1):
+            for j in range(m+1):
+                if i == 0:
+                    dp[i][j] = True if j==0 else (p[j-1] == '*' and dp[i][j-2])
+                elif j == 0:
+                    dp[i][j] = False
+                elif p[j-1] == s[i-1] or p[j-1] == '.': 
+                    dp[i][j] = dp[i-1][j-1]
+                elif p[j-1] == '*':
+                    if p[j-2] in (s[i-1], '.'):
+                        dp[i][j] = dp[i][j-2] or dp[i-1][j] or dp[i][j-1]
+                    if not dp[i][j]:
+                        dp[i][j] = dp[i][j-2]
+
+        return dp[-1][-1]
+
 # a more readable version of the same algorithm
 
 class Solution:
