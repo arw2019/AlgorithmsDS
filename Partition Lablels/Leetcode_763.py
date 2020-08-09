@@ -1,24 +1,18 @@
+# O(N) time, N=len(S)
+# O(L) space, L = length of alphabet
 class Solution:
     def partitionLabels(self, S: str) -> List[int]:
-        d, dq = dict(), collections.deque()
+        d = {}
         for i, char in enumerate(S):
-            if char not in d.keys(): 
-                d[char] = [i, i]
-                dq.append(char)
-            elif i > d[char][1]: d[char][1] = i
-        
+            d[char] = i
         ans = []
-        while dq:
-            char1 = dq.popleft()
-            start, end = d[char1][0], d[char1][1]
-            while dq:
-                char2 = dq.popleft()
-                if d[char2][1] <= end or d[char2][0] < end:
-                    end = max(end, d[char2][1])
-                else:
-                    dq.appendleft(char2)
-                    ans.append(end-start+1)
-                    start, end = None, None
-                    break
-        if start is not None: ans.append(end-start+1)
+        start = 0
+        cur, finished = set(), set()
+        for i, char in enumerate(S):
+            if d[char] == i: 
+                finished.add(char)
+            cur.add(char)
+            if cur == finished:
+                ans += [i+1-start]
+                start = i+1
         return ans
