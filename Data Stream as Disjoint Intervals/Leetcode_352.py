@@ -1,5 +1,4 @@
 class SummaryRanges:
-
     def __init__(self):
         self.seen = set()
         self.start, self.end = dict(), dict()
@@ -14,14 +13,14 @@ class SummaryRanges:
         self.seen.add(val)
         interval = [val, val]
         if val + 1 in self.start.keys():
-            interval[1] = self.start[val+1]
-            self.start.pop(val+1)
+            interval[1] = self.start[val + 1]
+            self.start.pop(val + 1)
         if val - 1 in self.end.keys():
-            interval[0] = self.end[val-1]
-            self.end.pop(val-1)
+            interval[0] = self.end[val - 1]
+            self.end.pop(val - 1)
         self.start[interval[0]] = interval[1]
         self.end[interval[1]] = interval[0]
-    
+
     def getIntervals(self) -> List[List[int]]:
         """
         at each call intervals need to be sorted
@@ -29,12 +28,16 @@ class SummaryRanges:
         """
         return sorted(self.start.items())
 
+
 import bisect
+
+
 class SummaryRanges:
     def __init__(self):
         self.seen = set()
-        self.ends = [-float('inf'), float('inf')]
-        self.starts = [-float('inf'), float('inf')]
+        self.ends = [-float("inf"), float("inf")]
+        self.starts = [-float("inf"), float("inf")]
+
     def addNum(self, val: int) -> None:
         """
         intervals are stored in a sorted array
@@ -46,23 +49,25 @@ class SummaryRanges:
             return
         self.seen.add(val)
         i = bisect.bisect_left(self.starts, val) - 1
-        if val-1 == self.ends[i] and val+1 == self.starts[i+1]:
+        if val - 1 == self.ends[i] and val + 1 == self.starts[i + 1]:
             del self.ends[i]
-            del self.starts[i+1]
-        elif val-1==self.ends[i]:
-            self.ends[i]+=1
-        elif val+1==self.starts[i+1]:
-            self.starts[i+1]-=1
+            del self.starts[i + 1]
+        elif val - 1 == self.ends[i]:
+            self.ends[i] += 1
+        elif val + 1 == self.starts[i + 1]:
+            self.starts[i + 1] -= 1
         else:
-            self.ends.insert(i+1, val)
-            self.starts.insert(i+1, val)
+            self.ends.insert(i + 1, val)
+            self.starts.insert(i + 1, val)
+
     def getIntervals(self) -> List[List[int]]:
         """
         O(k) time complexity
-        intervals need to be retrieved from the sorted arrays each time 
+        intervals need to be retrieved from the sorted arrays each time
         but they are already in sorted order
         """
-        return [[s,e] for s, e in zip(self.starts[1:-1], self.ends[1:-1])]
+        return [[s, e] for s, e in zip(self.starts[1:-1], self.ends[1:-1])]
+
 
 # Your SummaryRanges object will be instantiated and called as such:
 # obj = SummaryRanges()
